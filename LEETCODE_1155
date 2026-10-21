@@ -1,0 +1,34 @@
+class Solution {
+public:
+    #define ll long long int
+    int sumOfDice1(int target,int n,int k, vector<vector<ll>> dp){
+        if(n==0&&target==0) return 1;//memoization
+        if(n==0||target<0) return 0;
+        if(dp[n][target]!=-1) return dp[n][target];
+        int sum=0;
+        for(int i=1;i<=k;i++){
+           sum=((sum%1000000007)+(sumOfDice1(target-i,n-1,k,dp)%1000000007))%1000000007;
+        }
+        return dp[n][target]=(sum%1000000007);
+    }
+    int sumOfDice2(int t,int n,int k, vector<vector<ll>>& dp){
+        
+        dp[0][0]=1;//tabulation
+        for(int i=1;i<n+1;i++){
+            ll sum=0;
+            for(int j=1;j<t+1;j++){
+                for(int k=0;m;k++){
+                    if(t-k<0) continue;
+                    sum+=dp[n-1][t-1];
+                }
+                dp[i][j]=sum%1000000007;
+            }
+        }
+        return dp[n][t];
+    }
+    int numRollsToTarget(int n, int k, int target) {
+        vector<vector<ll>>dp(n+10,vector<ll>(target+10,0));
+    
+        return sumOfDice2(target,n,k,dp);
+    }
+};
